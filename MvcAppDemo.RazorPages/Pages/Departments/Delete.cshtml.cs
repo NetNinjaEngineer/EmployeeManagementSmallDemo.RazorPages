@@ -1,3 +1,4 @@
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using MvcAppDemo.RazorPages.Repository.Interfaces;
 
@@ -5,10 +6,15 @@ namespace MvcAppDemo.RazorPages.Pages.Departments
 {
     public class DeleteModel : BaseDIPageModel
     {
+        private readonly IMapper _mapper;
         private readonly IDepartmentRepository _departmentRepository;
 
-        public DeleteModel(IDepartmentRepository departmentRepository) : base(departmentRepository)
+        public DeleteModel(
+            IMapper mapper,
+            IDepartmentRepository departmentRepository)
+            : base(departmentRepository, mapper)
         {
+            _mapper = mapper;
             _departmentRepository = departmentRepository;
         }
 

@@ -13,18 +13,18 @@ namespace MvcAppDemo.RazorPages.Repository
         public GenericRepository(ApplicationDbContext context)
         {
             _context = context;
-            _dbSet = _context.Set<T>();
+            _dbSet = context.Set<T>();
         }
 
         public void Create(T entity)
         {
-            _context.Set<T>().Add(entity);
+            _dbSet.Add(entity);
             _context.SaveChanges();
         }
 
         public void Delete(T entity)
         {
-            _context?.Set<T>().Remove(entity);
+            _dbSet.Remove(entity);
             _context?.SaveChanges();
         }
 
@@ -52,8 +52,8 @@ namespace MvcAppDemo.RazorPages.Repository
 
         public void Update(T entity)
         {
-            _context.Set<T>().Update(entity);
-            _context.SaveChanges();
+            _dbSet.Update(entity);
+            _context?.SaveChanges();
         }
     }
 }

@@ -1,21 +1,27 @@
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using MvcAppDemo.RazorPages.Entities;
 using MvcAppDemo.RazorPages.Repository.Interfaces;
+using MvcAppDemo.RazorPages.ViewModels;
 
 namespace MvcAppDemo.RazorPages.Pages.Departments
 {
     public class CreateModel : BaseDIPageModel
     {
+        private readonly IMapper _mapper;
         private readonly IDepartmentRepository _departmentRepository;
 
-        public CreateModel(IDepartmentRepository departmentRepository)
-            : base(departmentRepository)
+        public CreateModel(
+            IDepartmentRepository departmentRepository,
+            IMapper mapper)
+            : base(departmentRepository, mapper)
         {
+            _mapper = mapper;
             _departmentRepository = departmentRepository;
         }
 
         [BindProperty]
-        public Department Department { get; set; } = null!;
+        public DepartmentViewModel Department { get; set; } = null!;
 
 
         public IActionResult OnGet()
@@ -23,11 +29,11 @@ namespace MvcAppDemo.RazorPages.Pages.Departments
             return Page();
         }
 
-        public async Task<IActionResult> OnPostAsync()
+        public IActionResult OnPostAsync()
         {
             if (ModelState.IsValid)
             {
-                _departmentRepository.Create(Department);
+                _departmentRepository.Create(_mapper.Map<Department>(Department));
                 return RedirectToPage("./Index");
             }
 
