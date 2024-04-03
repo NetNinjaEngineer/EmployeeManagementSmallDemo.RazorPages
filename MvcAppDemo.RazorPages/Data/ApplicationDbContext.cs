@@ -9,7 +9,9 @@ namespace MvcAppDemo.RazorPages.Data
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
 
-        public DbSet<Department> Departments { get; set; } = null!;
+        public DbSet<Department> Departments { get; set; } = default!;
+
+        public DbSet<Employee> Employees { get; set; } = default!;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
