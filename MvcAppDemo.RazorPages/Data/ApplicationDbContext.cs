@@ -20,7 +20,6 @@ namespace MvcAppDemo.RazorPages.Data
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApplicationDbContext).Assembly);
 
         }
-        public DbSet<MvcAppDemo.RazorPages.ViewModels.DepartmentViewModel> DepartmentViewModel { get; set; } = default!;
 
     }
 }

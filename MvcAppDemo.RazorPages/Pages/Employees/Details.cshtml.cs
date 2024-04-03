@@ -27,6 +27,8 @@ namespace MvcAppDemo.RazorPages.Pages.Employees
 
             EmployeeViewModel = mapper.Map<EmployeeViewModel>(employee);
 
+            ViewData["Department"] = employee.Department.DepartmentName;
+
             return Page();
         }
     }

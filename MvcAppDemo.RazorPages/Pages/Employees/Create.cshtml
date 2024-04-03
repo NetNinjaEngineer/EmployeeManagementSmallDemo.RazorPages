@@ -42,10 +42,10 @@
                 <input asp-for="EmployeeViewModel.Salary" class="form-control" />
                 <span asp-validation-for="EmployeeViewModel.Salary" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="EmployeeViewModel.IsActive" class="control-label"></label>
-                <input asp-for="EmployeeViewModel.IsActive" class="form-control" />
-                <span asp-validation-for="EmployeeViewModel.IsActive" class="text-danger"></span>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="EmployeeViewModel.IsActive" /> @Html.DisplayNameFor(model => model.EmployeeViewModel.IsActive)
+                </label>
             </div>
             <div class="form-group">
                 <label asp-for="EmployeeViewModel.PhoneNumber" class="control-label"></label>
@@ -58,7 +58,7 @@
                 <span asp-validation-for="EmployeeViewModel.HireDate" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="EmployeeViewModel.Department" class="control-label"></label>
+                <label class="control-label">Department</label>
                 <select class="form-control" asp-items="@selectList" asp-for="EmployeeViewModel.DepartmentId">
                     <option value="@null">------ Select Department ------</option>
                 </select>

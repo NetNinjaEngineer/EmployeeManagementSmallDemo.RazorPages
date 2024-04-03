@@ -1,6 +1,7 @@
 ﻿@page
 @model MvcAppDemo.RazorPages.Pages.Employees.IndexModel
 @{
+    var department = Model.Employees.Select(x => x.DepartmentId);
 }
 <a asp-page="Create">Create</a>
 
@@ -38,19 +39,10 @@
                 <td>@employee.Address</td>
                 <td>@employee.Age</td>
                 <td>@Html.DisplayFor(e => employee.Salary)</td>
-                <td>@Html.DisplayFor(e => employee.Department!.DepartmentName)</td>
+                <td>@Html.DisplayFor(e => employee.Department)</td>
                 <td>@Html.DisplayFor(e => employee.Email)</td>
                 <td>@employee.PhoneNumber</td>
-                <td>
-                @if (employee.IsActive)
-                {
-                    <i class="fa-solid fa-circle" style="color: green"></i>
-                }
-                else
-                {
-                    <i class="fa-solid fa-circle" style="color: red"></i>
-                }
-                </td>
+                <td>@employee.IsActive</td>
                 <td>@employee.HireDate</td>
                 <td><a asp-page="Details" class="btn btn-info" asp-route-id="@employee.Id">Details</a></td>
                 <td><a asp-page="Edit" class="btn btn-warning" asp-route-id="@employee.Id">Edit</a></td>

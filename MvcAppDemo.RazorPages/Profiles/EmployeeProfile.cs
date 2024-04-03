@@ -8,7 +8,12 @@ namespace MvcAppDemo.RazorPages.Profiles
     {
         public EmployeeProfile()
         {
-            CreateMap<EmployeeViewModel, Employee>().ReverseMap();
+            CreateMap<EmployeeViewModel, Employee>();
+
+            CreateMap<Employee, EmployeeViewModel>()
+                .ForMember(e => e.Department,
+                    options =>
+                    options.MapFrom(x => x.Department.DepartmentName));
         }
     }
 }
