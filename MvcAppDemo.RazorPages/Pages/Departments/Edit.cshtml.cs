@@ -1,17 +1,16 @@
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using MvcAppDemo.RazorPages.Data;
 using MvcAppDemo.RazorPages.Entities;
+using MvcAppDemo.RazorPages.Repository.Interfaces;
 
 namespace MvcAppDemo.RazorPages.Pages.Departments
 {
-    public class EditModel : PageModel
+    public class EditModel : BaseDIPageModel
     {
-        private readonly ApplicationDbContext _context;
+        private readonly IDepartmentRepository _departmentRepository;
 
-        public EditModel(ApplicationDbContext context)
+        public EditModel(IDepartmentRepository departmentRepository) : base(departmentRepository)
         {
-            _context = context;
+            _departmentRepository = departmentRepository;
         }
 
         public Department? Department { get; set; }
@@ -21,7 +20,7 @@ namespace MvcAppDemo.RazorPages.Pages.Departments
             if (id is null)
                 return NotFound();
 
-            var department = await _context.Departments.FindAsync(id);
+            var department = await _departmentRepository.FindByConditionAsync(x => x.Id == id);
 
             if (department is null)
                 return NotFound();
@@ -38,15 +37,13 @@ namespace MvcAppDemo.RazorPages.Pages.Departments
                 if (id is null)
                     return NotFound();
 
-                var departmentForUpdate = await _context.Departments.FindAsync(id);
+                var departmentForUpdate = await _departmentRepository.FindByConditionAsync(x => x.Id == id);
 
                 departmentForUpdate.DateOfCreation = department.DateOfCreation;
                 departmentForUpdate.Code = department.Code;
                 departmentForUpdate.DepartmentName = department.DepartmentName;
 
-                _context.Departments.Update(departmentForUpdate);
-
-                await _context.SaveChangesAsync();
+                _departmentRepository.Update(departmentForUpdate);
 
                 return RedirectToPage("Index");
             }

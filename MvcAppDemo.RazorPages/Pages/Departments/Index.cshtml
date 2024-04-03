@@ -1,6 +1,7 @@
 ﻿@page
 @model MvcAppDemo.RazorPages.Pages.Departments.IndexModel
 @{
+    ViewData["Title"] = "Index";
 }
 
 <div class="mb-5">
@@ -36,7 +37,7 @@ else
                     <td>@department.DateOfCreation</td>
                     <td><a asp-page="Details" class="btn btn-info" asp-route-id="@department.Id">Details</a></td>
                     <td><a asp-page="Edit" class="btn btn-warning" asp-route-id="@department.Id">Edit</a></td>
-                    <td><a asp-page="Delete" class="btn btn-danger" asp-route-id="@department.Id">Delete</a></td>
+                    <td><a asp-page="Delete" class="btn btn-danger" onclick="return confirm('Are you sure to delete this department ?!')" asp-route-id="@department.Id">Delete</a></td>
                 </tr>
             }
         </tbody>

@@ -1,23 +1,22 @@
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
-using MvcAppDemo.RazorPages.Data;
 using MvcAppDemo.RazorPages.Entities;
+using MvcAppDemo.RazorPages.Repository.Interfaces;
 
 namespace MvcAppDemo.RazorPages.Pages.Departments
 {
-    public class IndexModel : PageModel
+    public class IndexModel : BaseDIPageModel
     {
-        private readonly ApplicationDbContext _context;
-        public IEnumerable<Department> Departments { get; set; } = null!;
+        private readonly IDepartmentRepository _departmentRepository;
 
-        public IndexModel(ApplicationDbContext context)
+        public IndexModel(IDepartmentRepository departmentRepository) : base(departmentRepository)
         {
-            _context = context;
+            _departmentRepository = departmentRepository;
         }
+
+        public IEnumerable<Department> Departments { get; set; } = null!;
 
         public async Task OnGet()
         {
-            Departments = await _context.Departments.ToListAsync();
+            Departments = await _departmentRepository.GetAllAsync();
         }
     }
 }

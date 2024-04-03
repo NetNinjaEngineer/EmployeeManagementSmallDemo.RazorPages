@@ -1,34 +1,29 @@
 using Microsoft.AspNetCore.Mvc;
-using MvcAppDemo.RazorPages.Entities;
 using MvcAppDemo.RazorPages.Repository.Interfaces;
 
 namespace MvcAppDemo.RazorPages.Pages.Departments
 {
-    public class DetailsModel : BaseDIPageModel
+    public class DeleteModel : BaseDIPageModel
     {
         private readonly IDepartmentRepository _departmentRepository;
 
-        public DetailsModel(IDepartmentRepository departmentRepository) : base(departmentRepository)
+        public DeleteModel(IDepartmentRepository departmentRepository) : base(departmentRepository)
         {
             _departmentRepository = departmentRepository;
         }
 
-        public Department? Department { get; set; }
-
-
         public async Task<IActionResult> OnGet(int? id)
         {
-            if (id is null)
+            if (id == null)
                 return NotFound();
 
             var department = await _departmentRepository.FindByConditionAsync(x => x.Id == id);
-
             if (department is null)
                 return NotFound();
 
-            Department = department;
+            _departmentRepository.Delete(department);
 
-            return Page();
+            return RedirectToPage("Index");
         }
     }
 }

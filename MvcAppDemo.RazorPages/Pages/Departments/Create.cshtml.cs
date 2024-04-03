@@ -1,21 +1,22 @@
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using MvcAppDemo.RazorPages.Data;
 using MvcAppDemo.RazorPages.Entities;
+using MvcAppDemo.RazorPages.Repository.Interfaces;
 
 namespace MvcAppDemo.RazorPages.Pages.Departments
 {
-    public class CreateModel : PageModel
+    public class CreateModel : BaseDIPageModel
     {
-        private readonly ApplicationDbContext _context;
+        private readonly IDepartmentRepository _departmentRepository;
+
+        public CreateModel(IDepartmentRepository departmentRepository)
+            : base(departmentRepository)
+        {
+            _departmentRepository = departmentRepository;
+        }
 
         [BindProperty]
         public Department Department { get; set; } = null!;
 
-        public CreateModel(ApplicationDbContext context)
-        {
-            _context = context;
-        }
 
         public IActionResult OnGet()
         {
@@ -26,8 +27,7 @@ namespace MvcAppDemo.RazorPages.Pages.Departments
         {
             if (ModelState.IsValid)
             {
-                _context.Departments.Add(Department);
-                await _context.SaveChangesAsync();
+                _departmentRepository.Create(Department);
                 return RedirectToPage("./Index");
             }
 
