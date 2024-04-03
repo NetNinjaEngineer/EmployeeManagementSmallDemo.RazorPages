@@ -1,0 +1,85 @@
+﻿@page
+@model MvcAppDemo.RazorPages.Pages.Employees.CreateModel
+@{
+    ViewData["Title"] = "Create";
+    var departments = ViewData["Departments"] as IEnumerable<Department>;
+    var selectList = new SelectList(departments, "Id", "DepartmentName");
+}
+
+<div asp-validation-summary="All" class="text-danger"></div>
+
+<h1>Create</h1>
+
+<h4>DepartmentViewModel</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="EmployeeViewModel.Name" class="control-label"></label>
+                <input asp-for="EmployeeViewModel.Name" class="form-control" />
+                <span asp-validation-for="EmployeeViewModel.Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EmployeeViewModel.Email" class="control-label"></label>
+                <input asp-for="EmployeeViewModel.Email" class="form-control" />
+                <span asp-validation-for="EmployeeViewModel.Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EmployeeViewModel.Age" class="control-label"></label>
+                <input asp-for="EmployeeViewModel.Age" class="form-control" />
+                <span asp-validation-for="EmployeeViewModel.Age" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EmployeeViewModel.Address" class="control-label"></label>
+                <input asp-for="EmployeeViewModel.Address" class="form-control" />
+                <span asp-validation-for="EmployeeViewModel.Address" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EmployeeViewModel.Salary" class="control-label"></label>
+                <input asp-for="EmployeeViewModel.Salary" class="form-control" />
+                <span asp-validation-for="EmployeeViewModel.Salary" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EmployeeViewModel.IsActive" class="control-label"></label>
+                <input asp-for="EmployeeViewModel.IsActive" class="form-control" />
+                <span asp-validation-for="EmployeeViewModel.IsActive" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EmployeeViewModel.PhoneNumber" class="control-label"></label>
+                <input asp-for="EmployeeViewModel.PhoneNumber" class="form-control" />
+                <span asp-validation-for="EmployeeViewModel.PhoneNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EmployeeViewModel.HireDate" class="control-label"></label>
+                <input asp-for="EmployeeViewModel.HireDate" class="form-control" />
+                <span asp-validation-for="EmployeeViewModel.HireDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EmployeeViewModel.Department" class="control-label"></label>
+                <select class="form-control" asp-items="@selectList" asp-for="EmployeeViewModel.DepartmentId">
+                    <option value="@null">------ Select Department ------</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="EmployeeViewModel.Image" class="control-label"></label>
+                <input asp-for="EmployeeViewModel.Image" class="form-control" />
+                <span asp-validation-for="EmployeeViewModel.Image" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

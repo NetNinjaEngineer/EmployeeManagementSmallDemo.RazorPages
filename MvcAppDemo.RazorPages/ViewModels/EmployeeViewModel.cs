@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using MvcAppDemo.RazorPages.Entities;
+using System.ComponentModel.DataAnnotations;
 
 namespace MvcAppDemo.RazorPages.ViewModels
 {
@@ -26,9 +27,10 @@ namespace MvcAppDemo.RazorPages.ViewModels
         [EmailAddress]
         public string? Email { get; set; }
 
+        [Required]
         public IFormFile? Image { get; set; }
 
-        public string? ImageName { get; set; }
+        public string? ImageName { get; set; } = null;
 
         [Phone]
         public string? PhoneNumber { get; set; }
@@ -36,5 +38,7 @@ namespace MvcAppDemo.RazorPages.ViewModels
         public DateTime HireDate { get; set; }
 
         public int? DepartmentId { get; set; }
+
+        public Department? Department { get; set; } = null;
     }
 }
