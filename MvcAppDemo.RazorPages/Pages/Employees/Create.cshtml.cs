@@ -50,6 +50,14 @@ namespace MvcAppDemo.RazorPages.Pages.Employees
                         await EmployeeViewModel.Image.CopyToAsync(fileStream);
                     }
 
+                    using (var memoryStream = new MemoryStream())
+                    {
+                        await EmployeeViewModel.Image!.CopyToAsync(memoryStream);
+                        var employeeImageBytes = memoryStream.ToArray();
+                        var employeeImageBase64 = Convert.ToBase64String(employeeImageBytes);
+                        ViewData["PreviewImage"] = $"data:image/{Path.GetExtension(EmployeeViewModel.Image.FileName).Trim('.')};base64,{employeeImageBase64}";
+                    }
+
                     var mappedEmployee = _mapper.Map<Employee>(EmployeeViewModel);
                     _employeeRepository.Create(mappedEmployee);
                     return RedirectToPage("Index");

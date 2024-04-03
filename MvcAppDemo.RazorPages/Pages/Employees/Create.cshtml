@@ -4,6 +4,7 @@
     ViewData["Title"] = "Create";
     var departments = ViewData["Departments"] as IEnumerable<Department>;
     var selectList = new SelectList(departments, "Id", "DepartmentName");
+    var empImage = @ViewData["PreviewImage"] as string;
 }
 
 <div asp-validation-summary="All" class="text-danger"></div>
@@ -67,6 +68,12 @@
                 <input asp-for="EmployeeViewModel.Image" class="form-control" />
                 <span asp-validation-for="EmployeeViewModel.Image" class="text-danger"></span>
             </div>
+
+            @if (ViewData["PreviewImage"] != null)
+            {
+                <img src="@empImage" alt="Employee Profile Picture" class="img-thumbnail" />
+            }
+
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
