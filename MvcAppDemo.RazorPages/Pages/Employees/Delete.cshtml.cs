@@ -25,6 +25,11 @@ namespace MvcAppDemo.RazorPages.Pages.Employees
 
             _employeeRepository.Delete(employee);
 
+            var employeeImagePath = $"{Directory.GetCurrentDirectory()}\\wwwroot\\Images\\{employee.ImageName}";
+
+            if (System.IO.File.Exists(employeeImagePath))
+                System.IO.File.Delete(employeeImagePath);
+
             return RedirectToPage("./Index");
 
         }
