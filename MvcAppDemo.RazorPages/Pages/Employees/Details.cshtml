@@ -1,0 +1,58 @@
+﻿@page
+@model MvcAppDemo.RazorPages.Pages.Employees.DetailsModel
+@{
+    ViewData["Title"] = "Details";
+    var employeeImage = Model.EmployeeViewModel.ImageName;
+    var employeeDepartment = Model.EmployeeViewModel.Department?.DepartmentName;
+}
+
+<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+<div class="form-group">
+    <img width="400px" style="object-fit:cover" src="~/Images/@employeeImage" alt="@employeeImage" />
+</div>
+
+
+<div class="form-group">
+    <label asp-for="EmployeeViewModel.Name" class="control-label"></label>
+    <input readonly asp-for="EmployeeViewModel.Name" class="form-control" />
+    <span asp-validation-for="EmployeeViewModel.Name" class="text-danger"></span>
+</div>
+<div class="form-group">
+    <label asp-for="EmployeeViewModel.Email" class="control-label"></label>
+    <input readonly asp-for="EmployeeViewModel.Email" class="form-control" />
+    <span asp-validation-for="EmployeeViewModel.Email" class="text-danger"></span>
+</div>
+<div class="form-group">
+    <label asp-for="EmployeeViewModel.Age" class="control-label"></label>
+    <input readonly asp-for="EmployeeViewModel.Age" class="form-control" />
+    <span asp-validation-for="EmployeeViewModel.Age" class="text-danger"></span>
+</div>
+<div class="form-group">
+    <label asp-for="EmployeeViewModel.Address" class="control-label"></label>
+    <input readonly asp-for="EmployeeViewModel.Address" class="form-control" />
+    <span asp-validation-for="EmployeeViewModel.Address" class="text-danger"></span>
+</div>
+<div class="form-group">
+    <label asp-for="EmployeeViewModel.Salary" class="control-label"></label>
+    <input readonly asp-for="EmployeeViewModel.Salary" class="form-control" />
+    <span asp-validation-for="EmployeeViewModel.Salary" class="text-danger"></span>
+</div>
+<div class="form-group">
+    <label asp-for="EmployeeViewModel.IsActive" class="control-label"></label>
+    <input readonly asp-for="EmployeeViewModel.IsActive" class="form-control" />
+    <span asp-validation-for="EmployeeViewModel.IsActive" class="text-danger"></span>
+</div>
+<div class="form-group">
+    <label asp-for="EmployeeViewModel.PhoneNumber" class="control-label"></label>
+    <input readonly asp-for="EmployeeViewModel.PhoneNumber" class="form-control" />
+    <span asp-validation-for="EmployeeViewModel.PhoneNumber" class="text-danger"></span>
+</div>
+<div class="form-group">
+    <label asp-for="EmployeeViewModel.HireDate" class="control-label"></label>
+    <input readonly asp-for="EmployeeViewModel.HireDate" class="form-control" />
+    <span asp-validation-for="EmployeeViewModel.HireDate" class="text-danger"></span>
+</div>
+<div>
+    @employeeDepartment
+</div>

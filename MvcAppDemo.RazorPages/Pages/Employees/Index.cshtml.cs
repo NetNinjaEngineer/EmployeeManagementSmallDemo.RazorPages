@@ -19,7 +19,7 @@ namespace MvcAppDemo.RazorPages.Pages.Employees
 
         public async Task OnGet()
         {
-            var employees = await _employeeRepository.GetAllAsync();
+            var employees = await _employeeRepository.GetAllAsync(e => e.Department);
             Employees = _mapper.Map<IEnumerable<Employee>, IEnumerable<EmployeeViewModel>>(employees);
         }
     }
